@@ -10,8 +10,11 @@
 <h2>Here is the list of items: </h2>
 <ul>
   <li class="text" *ngFor="let item of items | async; let i = index">
-    <b>{{ item.$key | slice:-5 }}</b> - {{item.$value}}
-    <button (click)="deleteItem(item.$key)">Delete</button>
+    <app-item [value]="item"
+              (deleted)="deleteItem(item.$key)"
+              (nameChanged)="updateName(item.$key, $event)"
+              (countChanged)="updateCount(item.$key, $event)"
+    ></app-item>
   </li>
 </ul>
 

@@ -1,0 +1,16 @@
+<div>
+  <em>{{value.count}}</em> -
+  <ng-template *ngIf="editing; then editTemplate else viewTemplate"></ng-template>
+  <button (click)="deleteItem()">Delete</button>
+</div>
+<ng-template #viewTemplate>
+  <span>{{value.name}}</span>
+  <button (click)="startEditing()">Edit</button>
+  <button (click)="increaseCount()">+</button>
+  <button (click)="decreaseCount()" [disabled]="value.count <= 0">-</button>
+</ng-template>
+<ng-template #editTemplate>
+  <input (keyup)="keyUp($event)" [(ngModel)]="editingValue"/>
+  <button (click)="submitChange(editingValue)">Submit</button>
+  <button (click)="stopEditing()">Cancel</button>
+</ng-template>

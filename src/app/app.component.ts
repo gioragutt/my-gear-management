@@ -19,12 +19,23 @@ export class AppComponent {
     event.preventDefault();
     if (event.keyCode === 13) {
       const value = (<any>event.target).value;
-      this.items.push(value);
+      this.items.push({
+        name: value,
+        count: 0
+      });
       (<any>event.target).value = '';
     }
   }
 
   deleteItem(key: string): void {
     this.items.remove(key);
+  }
+
+  updateName(key: string, value: string) {
+    this.items.update(key, {name: value});
+  }
+
+  updateCount(key: string, count: number) {
+    this.items.update(key, {count});
   }
 }
