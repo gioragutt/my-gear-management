@@ -14,4 +14,17 @@ export class AppComponent {
   constructor(db: AngularFireDatabase) {
     this.items = db.list('/items');
   }
+
+  addItem(event: KeyboardEvent) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+      const value = (<any>event.target).value;
+      this.items.push(value);
+      (<any>event.target).value = '';
+    }
+  }
+
+  deleteItem(key: string): void {
+    this.items.remove(key);
+  }
 }
